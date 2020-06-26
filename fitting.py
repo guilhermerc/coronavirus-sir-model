@@ -38,15 +38,15 @@ def solver(t, gamma, alpha, s_0, i_0, a_0):
 
 # Ajustando os parâmetros gamma, alpham s_0, i_0 e a_0 do modelo SIR
 # ##############################################################################
-popt, pcov = curve_fit(solver, t, data, bounds=([0.0, 0.1, 0.0, 0.0, 0.0], [100.0, 1.0, M, M, M]))
+popt, pcov = curve_fit(solver, t, data, bounds=([0.0, 0.0, 0.0, 0.0, 0.0], [50.0, 1.0, M, M, M]))
 
 # Plotando os dados oficiais e a curva obtida pelo modelo SIR ajustado aos
 # mesmos
 # ##############################################################################
-plt.scatter(t, data, marker='.', color='orange', label ='Dados oficiais do MS')
-plt.plot(solver(np.arange(4*len(data)), *popt), label='Curva ajustada (modelo SIR)', linewidth=1.0)
-plt.text(250, 1000000, 'gamma=%1.1f, alpha=%1.1f\ns_0=%d, i_0=%d, a_0=%d' % tuple(popt))
-plt.title('Dados oficiais do MS e curva do modelo SIR ajustada aos mesmos')
+plt.scatter(t, data, marker='.', color='yellow', label ='Dados oficiais do MS até 23/06')
+plt.plot(solver(np.arange(200), *popt), label='Curva ajustada (modelo SIR) - 23/06 (t = 118)', linewidth=1.0)
+plt.text(150, 100000, 'gamma=%1.1f, alpha=%1.2f\ns_0=%d, i_0=%d, a_0=%d' % tuple(popt))
+plt.title('Dados oficiais do MS e curvas do modelo SIR ajustadas aos mesmos')
 plt.xlabel('Tempo transcorrido desde a primeira infecção [em dias]')
 plt.ylabel('Total acumulado de pessoas infectadas')
 plt.legend()
